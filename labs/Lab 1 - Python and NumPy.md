@@ -13,8 +13,7 @@ jupyter:
     name: python3
 ---
 
-# Name(s)
-**PUT YOUR FULL NAME(S) HERE**
+# Name: Jack Kooley
 
 
 **Instructions:** This is an individual assignment, but you may discuss your code with your neighbors.
@@ -36,56 +35,98 @@ Please read and reference the following as your progress through this course.
 **In the space provided below, what are three things that still remain unclear or need further explanation?**
 
 
-**YOUR ANSWER HERE**
+What is the shortcut for making a new cell? How can I quickly send you my notebook? What is the marsland notebook?
 
 
 ## Exercises 1-7
 For the following exercises please read the Python appendix in the Marsland textbook and answer problems A.1-A.7 in the space provided below.
 
+```python
+import pandas as pd
+import numpy as np
+```
 
 ## Exercise 1
 
 ```python
 # YOUR SOLUTION HERE
-#a=1000
-print('this is my answer',a+1) 
+a = np.full((6,4), 2)
+a
 ```
 
 ## Exercise 2
 
 ```python
 # YOUR SOLUTION HERE
-a=2000
+b = np.full((6,4), 1)
+np.fill_diagonal(b, 3)
+b
 ```
 
 ## Exercise 3
 
 ```python
 # YOUR SOLUTION HERE
+a * b
 ```
+
+```python
+np.dot(a, b)
+```
+
+This doesn't work because np.dot() is attempting to take the dot product of the arrays while the a * b expression is simply multiplying like cells
+
 
 ## Exercise 4
 
 ```python
 # YOUR SOLUTION HERE
+np.dot(a.transpose(), b)
 ```
+
+```python
+np.dot(a, b.transpose())
+```
+
+The reason these dot products are different is because they have different shapes when they are transposed and the dot product is dependent upon which shape is used in the expression.
+
 
 ## Exercise 5
 
 ```python
 # YOUR SOLUTION HERE
+def print_stuff(stuff):
+    print(stuff)
+    
+print_stuff("Hello, World")
 ```
 
 ## Exercise 6
 
 ```python
 # YOUR SOLUTION HERE
+def rand_arrays():
+    a = np.random.rand(2,2)
+    b = np.random.rand(2,2)
+    c = np.random.rand(2,2)
+    print(a + b + c)
+    print(np.mean(a))
+    print(np.mean(b))
+    print(np.mean(c))
+    
+rand_arrays()
 ```
 
 ## Exercise 7
 
 ```python
 # YOUR SOLUTION HERE
+def num_ones(arr):
+    tup = np.where(arr == 1)
+    return tup[0].size
+
+a = np.full((6,4), 1)
+num_ones(a)
 ```
 
 ## Excercises 8-???
@@ -97,6 +138,8 @@ Repeat exercise A.1 from Marsland, but create a Pandas DataFrame instead of a Nu
 
 ```python
 # YOUR SOLUTION HERE
+a = pd.DataFrame(np.full((6,4), 2))
+a
 ```
 
 ## Exercise 9
@@ -104,6 +147,10 @@ Repeat exercise A.2 using a DataFrame instead.
 
 ```python
 # YOUR SOLUTION HERE
+b = np.full((6,4), 1)
+np.fill_diagonal(b, 3)
+b = pd.DataFrame(b)
+b
 ```
 
 ## Exercise 10
@@ -111,6 +158,11 @@ Repeat exercise A.3 using DataFrames instead.
 
 ```python
 # YOUR SOLUTION HERE
+a * b
+```
+
+```python
+np.dot(a, b)
 ```
 
 ## Exercise 11
@@ -118,6 +170,11 @@ Repeat exercise A.7 using a dataframe.
 
 ```python
 # YOUR SOLUTION HERE
+def df_num_ones(df):
+    return df == 1
+
+a = pd.DataFrame(np.full((6,4), 1))
+num_ones(a)
 ```
 
 ## Exercises 12-14
@@ -138,6 +195,7 @@ How do you select the ``name`` column without using .iloc?
 
 ```python
 ## YOUR SOLUTION HERE
+titanic_df['name']
 ```
 
 ## Exercise 13
@@ -148,11 +206,20 @@ After setting the index to ``sex``, how do you select all passengers that are ``
 titanic_df.set_index('sex',inplace=True)
 ```
 
+```python
+titanic_df[titanic_df.index == "female"]
+```
+
 ## Exercise 14
 How do you reset the index?
 
 ```python
 ## YOUR SOLUTION HERE
+```
+
+```python
+titanic_df.reset_index(inplace = True)
+titanic_df
 ```
 
 ```python
