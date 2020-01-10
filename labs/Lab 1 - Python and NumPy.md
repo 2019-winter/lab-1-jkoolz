@@ -74,7 +74,7 @@ a * b
 np.dot(a, b)
 ```
 
-This doesn't work because np.dot() is attempting to take the dot product of the arrays while the a * b expression is simply multiplying like cells
+This doesn't work because np.dot() is attempting to take the dot product of the arrays while the a * b expression is simply multiplying like cells through element by element multiplication
 
 
 ## Exercise 4
@@ -106,13 +106,11 @@ print_stuff("Hello, World")
 ```python
 # YOUR SOLUTION HERE
 def rand_arrays():
-    a = np.random.rand(2,2)
-    b = np.random.rand(2,2)
-    c = np.random.rand(2,2)
-    print(a + b + c)
-    print(np.mean(a))
-    print(np.mean(b))
-    print(np.mean(c))
+    a = np.random.rand(6,4)
+    print(a.sum())
+    print(a.mean())
+    print(a.sum(axis = 1))
+    print(a.sum(axis = 0))
     
 rand_arrays()
 ```
@@ -122,8 +120,13 @@ rand_arrays()
 ```python
 # YOUR SOLUTION HERE
 def num_ones(arr):
-    tup = np.where(arr == 1)
-    return tup[0].size
+    c = 0
+    for i in range(len(arr)):
+        for j in range(len(arr[0])):
+            if (arr[i][j] == 1):
+                c += 1
+    
+    return c, len(np.where(arr == 1)[0])
 
 a = np.full((6,4), 1)
 num_ones(a)
@@ -171,10 +174,10 @@ Repeat exercise A.7 using a dataframe.
 ```python
 # YOUR SOLUTION HERE
 def df_num_ones(df):
-    return df == 1
+    return len(np.where(df == 1)[0])
 
 a = pd.DataFrame(np.full((6,4), 1))
-num_ones(a)
+df_num_ones(a)
 ```
 
 ## Exercises 12-14
@@ -207,7 +210,7 @@ titanic_df.set_index('sex',inplace=True)
 ```
 
 ```python
-titanic_df[titanic_df.index == "female"]
+titanic_df.loc["female"]
 ```
 
 ## Exercise 14
